@@ -27,18 +27,22 @@ public class WebSecurityConfiguration {
 	@Bean
 	protected SecurityFilterChain config(HttpSecurity http) throws Exception {
 
-		http.authorizeHttpRequests(req -> req.requestMatchers(HttpMethod.GET, "/user/api/check")
+		http.authorizeHttpRequests(req -> req.requestMatchers(HttpMethod.GET, "/user/api/**")
 				// here we can set the scope but we need to define multiple scopes
 				// .hasAnyAuthority("SCOPE_profile")
 				// if we have more then one roles are there then we can define
 				// .hasAnyRole("developer","qa")
 
-				.hasRole("developer")
+				 .hasRole("developer")
+				
+				//.authenticated()
 				// Here we can provide hasAuthority method, but we need to add the `ROLE`
 				// .hasAuthority("ROLE_developer")
 				.requestMatchers(HttpMethod.DELETE,"/user/delete/**")
 				.authenticated()
 				.requestMatchers(HttpMethod.GET,"/user/get/**")
+				.authenticated()
+				.anyRequest()
 				.authenticated()
 
 		);

@@ -39,5 +39,12 @@ public class UsersController {
 		
 		return new UserRest("Padm", "Sahu", "d38c9945-6467-4ca8-a160-d84a1fb47403");
 	}
+	
+	@PreAuthorize("hasRole('developer')")
+	@GetMapping("/api/get/{userId}")
+	public UserRest getUser(@PathVariable String userId) {
+		
+		return new UserRest("Padm", "Sahu", userId.toUpperCase());
+	}
 
 }
